@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item >
+
+        <shape android:shape="oval">
+
+            <solid android:color="@color/white"/>
+            <size android:width="8dp"
+                android:height="8dp"/>
+
+            <stroke android:width="1dp"
+                android:color="@color/home_bg"/>
+
+
+
+        </shape>
+
+
+
+    </item>
+
+
+    <item android:drawable="@drawable/switchon"
+        android:top="5dp"
+        android:bottom="5dp"
+        android:right="5dp"
+        android:left="5dp">
+    </item>
+
+</layer-list>
