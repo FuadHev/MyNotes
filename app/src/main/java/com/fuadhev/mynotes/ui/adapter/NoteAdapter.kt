@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fuadhev.mynotes.databinding.NoteItemBinding
 import com.fuadhev.mynotes.entity.Note
 
-class NoteAdapter(private var notesList: List<Note>) :
+class NoteAdapter(private val postClickListener: PostClickListener,private var notesList: List<Note>) :
     RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
     private val colors = listOf("#FF9E9E", "#91F48F", "#FFF599", "#9EFFFF", "#B69CFF")
@@ -38,8 +38,6 @@ class NoteAdapter(private var notesList: List<Note>) :
         b.noteTitle.text = note.note_title
 
 
-
-        // Renk sırasını takip eden sayaç değeriyle bir sonraki rengi alın
         val color = colors[colorCounter % colors.size]
         b.noteCard.setCardBackgroundColor(android.graphics.Color.parseColor(color))
         colorCounter++
@@ -62,8 +60,16 @@ class NoteAdapter(private var notesList: List<Note>) :
 
         }
 
+        b.noteCard.setOnClickListener {
+            postClickListener.postClickListener(note)
+        }
+
         b.createdTime.text = "${note.day} $month ${note.clock}"
     }
 
 
+}
+
+interface PostClickListener{
+    fun postClickListener(currentNote:Note)
 }

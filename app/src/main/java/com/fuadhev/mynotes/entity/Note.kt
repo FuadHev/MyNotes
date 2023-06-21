@@ -20,5 +20,5 @@ data class Note(
     @ColumnInfo(name = "clock") val clock: String,
     @ColumnInfo(name = "year") val year: Int
 
-)
+):java.io.Serializable
 

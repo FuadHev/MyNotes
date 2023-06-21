@@ -11,26 +11,33 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fuadhev.mynotes.R
 import com.fuadhev.mynotes.databinding.FragmentNotesListBinding
+import com.fuadhev.mynotes.entity.Note
 import com.fuadhev.mynotes.ui.adapter.NoteAdapter
+import com.fuadhev.mynotes.ui.adapter.PostClickListener
 
 
 class NotesListFragment : Fragment() {
 
 
-
     private lateinit var binding: FragmentNotesListBinding
     private val noteAdapter by lazy {
-        NoteAdapter(emptyList())
+        NoteAdapter(object : PostClickListener {
+            override fun postClickListener(currentNote: Note) {
+                findNavController().navigate(NotesListFragmentDirections.actionNotesListFragmentToNoteDetailFragment(currentNote))
+            }
+
+        }, emptyList())
     }
     private val viewModel by viewModels<NoteListViewModel> {
         ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_notes_list, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notes_list, container, false)
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -40,7 +47,7 @@ class NotesListFragment : Fragment() {
 
         setRecyclerView()
 
-        viewModel.allNoteLiveData.observe(viewLifecycleOwner){
+        viewModel.allNoteLiveData.observe(viewLifecycleOwner) {
             noteAdapter.updateNotes(it)
         }
         binding.floatingActionButton.setOnClickListener {
@@ -48,9 +55,10 @@ class NotesListFragment : Fragment() {
         }
 
     }
-    private fun setRecyclerView(){
-        binding.rv.layoutManager=LinearLayoutManager(requireActivity())
-        binding.rv.adapter=noteAdapter
+
+    private fun setRecyclerView() {
+        binding.rv.layoutManager = LinearLayoutManager(requireActivity())
+        binding.rv.adapter = noteAdapter
     }
 
 }

@@ -1,7 +1,6 @@
 package com.fuadhev.mynotes.ui.view.addNote
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -55,9 +54,10 @@ class AddNoteFragment : Fragment() {
             val month=now.get(Calendar.MONTH)+1
             val clock="$hour:$second"
             val year=now.get(Calendar.YEAR)
-
             val note=Note(0,noteTitle,noteTxt,day,month,clock,year)
             viewModel.insertNote(note)
+            findNavController().navigate(AddNoteFragmentDirections.actionAddNoteFragmentToNotesListFragment())
+
 
         }
 
