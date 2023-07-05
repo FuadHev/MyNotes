@@ -5,12 +5,12 @@ import androidx.lifecycle.LiveData
 import com.fuadhev.mynotes.entity.Note
 import com.fuadhev.mynotes.entity.ToDo
 import com.fuadhev.mynotes.room.MyRoomDatabase
+import com.fuadhev.mynotes.room.NotesDao
+import com.fuadhev.mynotes.room.ToDosDao
+import javax.inject.Inject
 
-class Repository(private val context:Context){
+class Repository @Inject constructor(private val noteDb:NotesDao,private val toDoDb: ToDosDao){
 
-    private val db=MyRoomDatabase.getInstance(context)
-    private val noteDb=db.notesDao()
-    private val toDoDb=db.toDosDao()
 
     fun getAllNotes(): LiveData<List<Note>> {
         return noteDb.getAllNotes()

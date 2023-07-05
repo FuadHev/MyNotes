@@ -14,8 +14,9 @@ import com.fuadhev.mynotes.databinding.FragmentNotesListBinding
 import com.fuadhev.mynotes.entity.Note
 import com.fuadhev.mynotes.ui.adapter.NoteAdapter
 import com.fuadhev.mynotes.ui.adapter.PostClickListener
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class NotesListFragment : Fragment() {
 
 
@@ -28,9 +29,7 @@ class NotesListFragment : Fragment() {
 
         }, emptyList())
     }
-    private val viewModel by viewModels<NoteListViewModel> {
-        ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-    }
+    private val viewModel by viewModels<NoteListViewModel> ()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

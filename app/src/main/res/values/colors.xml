@@ -9,5 +9,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="search_hint_color">#FFFFFF</color>
+    <color name="dialog_yes_bg">#30BE71</color>
+    <color name="dialog_no_bg">#FF0000</color>
 
 </resources>

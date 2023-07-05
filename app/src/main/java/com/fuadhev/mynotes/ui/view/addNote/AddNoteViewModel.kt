@@ -8,14 +8,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fuadhev.mynotes.entity.Note
 import com.fuadhev.mynotes.repo.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AddNoteViewModel(app:Application):AndroidViewModel(app) {
+@HiltViewModel
+class AddNoteViewModel @Inject constructor(private val repo:Repository):ViewModel() {
 
 // ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
 
-    private val repo=Repository(app.applicationContext)
+
 
 
 

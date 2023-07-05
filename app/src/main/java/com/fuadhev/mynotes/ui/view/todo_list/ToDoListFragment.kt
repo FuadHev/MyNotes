@@ -11,8 +11,9 @@ import com.fuadhev.mynotes.R
 import com.fuadhev.mynotes.databinding.FragmentToDoListBinding
 import com.fuadhev.mynotes.entity.ToDo
 import com.fuadhev.mynotes.ui.adapter.TodoAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ToDoListFragment : Fragment() {
     private lateinit var binding:FragmentToDoListBinding
     private val todoAdapter by lazy {

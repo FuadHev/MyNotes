@@ -1,6 +1,7 @@
 package com.fuadhev.mynotes.ui.view.addNote
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,21 +13,21 @@ import androidx.navigation.fragment.findNavController
 import com.fuadhev.mynotes.R
 import com.fuadhev.mynotes.databinding.FragmentAddNoteBinding
 import com.fuadhev.mynotes.entity.Note
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
+import kotlin.math.min
 
-
+@AndroidEntryPoint
 class AddNoteFragment : Fragment() {
 
 
-    private lateinit var binding:FragmentAddNoteBinding
-    private val viewModel by viewModels<AddNoteViewModel> {
-        ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-    }
+    private lateinit var binding: FragmentAddNoteBinding
+    private val viewModel by viewModels<AddNoteViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_add_note, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_note, container, false)
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -34,27 +35,29 @@ class AddNoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        val now=Calendar.getInstance()
-//
-//        @ColumnInfo(name = "day") val day: Int,
-//        @ColumnInfo(name = "month") val month: String,
-//        @ColumnInfo(name = "clock") val clock: Int,
-//        @ColumnInfo(name = "year") val year: Int
+        val now = Calendar.getInstance()
 
         binding.save.setOnClickListener {
 
             val hour = now.get(Calendar.HOUR_OF_DAY)
-            val second = now.get(Calendar.MINUTE)
+            val minute = now.get(Calendar.MINUTE)
+            Log.e("time", "$hour $minute")
 
-            val noteTitle=binding.noteTitle.text.toString()
-            val noteTxt=binding.noteTxt.text.toString()
-            val day=now.get(Calendar.DAY_OF_MONTH)
-            val month=now.get(Calendar.MONTH)+1
-            val clock="$hour:$second"
-            val year=now.get(Calendar.YEAR)
-            val note=Note(0,noteTitle,noteTxt,day,month,clock,year)
+            val noteTitle = binding.noteTitle.text.toString()
+            val noteTxt = binding.noteTxt.text.toString()
+            val day = now.get(Calendar.DAY_OF_MONTH)
+            val month = now.get(Calendar.MONTH) + 1
+
+            val clock = if (minute < 10) {
+                Log.e("time", "$hour 0$minute")
+                "$hour:0$minute"
+            } else {
+                "$hour:$minute"
+
+            }
+
+            val year = now.get(Calendar.YEAR)
+            val note = Note(0, noteTitle, noteTxt, day, month, clock, year)
             viewModel.insertNote(note)
             findNavController().navigate(AddNoteFragmentDirections.actionAddNoteFragmentToNotesListFragment())
 

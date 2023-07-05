@@ -13,19 +13,19 @@ abstract class MyRoomDatabase :RoomDatabase(){
     abstract fun notesDao(): NotesDao
     abstract fun toDosDao(): ToDosDao
 
-    companion object{
-        private var instance: MyRoomDatabase? = null
-
-        fun getInstance(context: Context): MyRoomDatabase {
-            return instance ?: synchronized(this) {
-                val databaseBuilder = Room.databaseBuilder(
-                    context.applicationContext,
-                    MyRoomDatabase::class.java,
-                    "note_database"
-                )
-                instance = databaseBuilder.build()
-                instance!!
-            }
-        }
-        }
+//    companion object{
+//        private var instance: MyRoomDatabase? = null
+//
+//        fun getInstance(context: Context): MyRoomDatabase {
+//            return instance ?: synchronized(this) {
+//                val databaseBuilder = Room.databaseBuilder(
+//                    context.applicationContext,
+//                    MyRoomDatabase::class.java,
+//                    "note_database"
+//                )
+//                instance = databaseBuilder.build()
+//                instance!!
+//            }
+//        }
+//        }
     }

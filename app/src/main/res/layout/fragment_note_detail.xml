@@ -8,6 +8,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/note_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.view.addNote.AddNoteFragment"
@@ -68,20 +69,20 @@
         </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/edit"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/circle_btn_bg"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/back"
-            app:layout_constraintEnd_toStartOf="@+id/save"
-            app:layout_constraintHorizontal_bias="0.96"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/back"
-            app:layout_constraintVertical_bias="0.026"
-            app:srcCompat="@drawable/edit"
-            tools:ignore="RtlSymmetry" />
+<!--        <ImageView-->
+<!--            android:id="@+id/edit"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="@drawable/circle_btn_bg"-->
+<!--            android:padding="10dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/back"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/save"-->
+<!--            app:layout_constraintHorizontal_bias="0.96"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/back"-->
+<!--            app:layout_constraintVertical_bias="0.026"-->
+<!--            app:srcCompat="@drawable/edit"-->
+<!--            tools:ignore="RtlSymmetry" />-->
 
         <ImageView
             android:id="@+id/back"
