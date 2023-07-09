@@ -9,8 +9,7 @@ import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
@@ -69,11 +68,14 @@ class NoteDetailFragment : Fragment() {
             }
 
         }
+        binding.delete.setOnClickListener {
+            showDeleteDialog()
+        }
         binding.noteTitle.setOnFocusChangeListener { _, hasFocus ->
-            binding.save.visibility = if (hasFocus) VISIBLE else INVISIBLE
+            binding.save.visibility = if (hasFocus) VISIBLE else GONE
         }
         binding.noteTxt.setOnFocusChangeListener { _, hasFocus ->
-            binding.save.visibility = if (hasFocus) VISIBLE else INVISIBLE
+            binding.save.visibility = if (hasFocus) VISIBLE else GONE
         }
 
         val note = args.note
@@ -130,6 +132,41 @@ class NoteDetailFragment : Fragment() {
 
     }
 
+    private fun showDeleteDialog() {
+        val dialogBinding = SaveChangesDialogBinding.inflate(layoutInflater)
+        val mDialog = Dialog(requireContext())
+        mDialog.setContentView(dialogBinding.root)
+        mDialog.setCancelable(false)
+        mDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialogBinding.dInfo.setText(R.string.delete)
+        binding.noteDetail.alpha = 0.5f
+
+        dialogBinding.yes.setOnClickListener {
+            val currentNode=args.note
+            val note = com.fuadhev.mynotes.entity.Note(
+                args.note.id,
+                binding.noteTitle.text.toString(),
+                binding.noteTxt.text.toString(),
+                currentNode.day,
+                currentNode.month,
+                currentNode.clock,
+                currentNode.year
+            )
+            viewModel.deleteNote(note)
+            binding.noteDetail.alpha = 1f
+            findNavController().navigate(NoteDetailFragmentDirections.actionNoteDetailFragmentToNotesListFragment())
+            mDialog.dismiss()
+        }
+
+        dialogBinding.no.setOnClickListener {
+            binding.noteDetail.alpha = 1f
+            mDialog.dismiss()
+        }
+
+        mDialog.create()
+        mDialog.show()
+    }
+
 
     private fun showDialog() {
         val dialogBinding = SaveChangesDialogBinding.inflate(layoutInflater)
@@ -141,7 +178,6 @@ class NoteDetailFragment : Fragment() {
         binding.noteDetail.alpha = 0.5f
 
         dialogBinding.yes.setOnClickListener {
-
             updateNote()
             binding.noteDetail.alpha = 1f
             mDialog.dismiss()

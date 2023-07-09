@@ -27,5 +27,8 @@ class Repository @Inject constructor(private val noteDb:NotesDao,private val toD
     suspend fun deleteNote(note:Note){
         return noteDb.deleteNote(note)
     }
+    suspend fun getNotesByTitle(title: String): List<Note>{
+        return noteDb.getNotesByTitle(title)
+    }
 
 }

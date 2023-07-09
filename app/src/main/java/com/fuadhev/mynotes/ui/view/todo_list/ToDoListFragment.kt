@@ -32,7 +32,7 @@ class ToDoListFragment : Fragment() {
     private fun setRecyclerView(){
         binding.rv.layoutManager=LinearLayoutManager(requireActivity())
         val list=ArrayList<ToDo>()
-        list.add(ToDo(0,"",0,0,"",true))
+        list.add(ToDo(0,"",false))
         todoAdapter.updateNotes(list)
         binding.rv.adapter=todoAdapter
     }

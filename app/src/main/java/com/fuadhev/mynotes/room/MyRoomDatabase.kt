@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.fuadhev.mynotes.entity.Note
 import com.fuadhev.mynotes.entity.ToDo
 
-@Database(entities = [Note::class, ToDo::class], version = 1)
+@Database(entities = [Note::class, ToDo::class], version = 2)
 abstract class MyRoomDatabase :RoomDatabase(){
 
     abstract fun notesDao(): NotesDao

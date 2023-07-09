@@ -12,7 +12,7 @@ interface ToDosDao {
     @Query("SELECT * FROM ToDo")
     fun getAllTodos(): LiveData<List<ToDo>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTodo(todo: ToDo)
 
     @Update

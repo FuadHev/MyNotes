@@ -60,7 +60,7 @@ class TodoAdapter(private var todosList: List<ToDo>) :
 
                     override fun onAnimationRepeat(animation: Animator) {}
                 })
-            } else if (currentProgress == 1f) {
+            } else   {
                 Log.e("tofalse","tofalse")
                 // Animasyon ileri yönde ilerlerken
                 b.lottieAnim.speed = -1.0f // Geriye doğru oynatma hızını ayarla
@@ -83,5 +83,9 @@ class TodoAdapter(private var todosList: List<ToDo>) :
 
     }
 
+
+}
+interface ToDoClickListener{
+   fun todoClickListener(toDO:ToDo)
 
 }

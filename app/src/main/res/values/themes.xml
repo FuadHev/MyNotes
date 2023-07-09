@@ -16,11 +16,12 @@
         <item name="windowActionBar">false</item>
     </style>
     <style name="ToolbarTitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">30sp</item> <!-- İstediğiniz boyutu buraya yazın -->
+        <item name="android:textSize">30sp</item>
     </style>
-    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+    <style name="SearchViewStyle" parent="">
         <item name="android:queryHint">@string/search_hint_text</item>
-        <item name="android:textColorHint">#FFFFFF</item>
+        <item name="android:textColorHint">@android:color/black</item>
+        <item name="editTextColor">@android:color/black</item>
     </style>
 
     <string name="search_hint_text">Search notes…</string>

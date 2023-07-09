@@ -1,7 +1,11 @@
 package com.fuadhev.mynotes.ui.view.note_list
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
+import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,7 +34,9 @@ class NotesListFragment : Fragment() {
         }, emptyList())
     }
     private val viewModel by viewModels<NoteListViewModel> ()
+    private lateinit var allNoteList:List<Note>
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +44,7 @@ class NotesListFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notes_list, container, false)
         // Inflate the layout for this fragment
+
         return binding.root
     }
 
@@ -45,13 +52,44 @@ class NotesListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setRecyclerView()
-
-        viewModel.allNoteLiveData.observe(viewLifecycleOwner) {
+        allNoteList=ArrayList()
+        setSearchView()
+        viewModel.searchNoteList.observe(viewLifecycleOwner){
             noteAdapter.updateNotes(it)
         }
+        viewModel.allNoteLiveData.observe(viewLifecycleOwner) {
+            noteAdapter.updateNotes(it)
+            allNoteList=it
+        }
+
         binding.floatingActionButton.setOnClickListener {
             findNavController().navigate(NotesListFragmentDirections.actionNotesListFragmentToAddNoteFragment())
         }
+
+    }
+    private fun setSearchView(){
+
+        binding.searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                if (query.trim() != "") {
+                    binding.searchview.clearFocus()
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+
+                if (newText.trim()!= "") {
+                    viewModel.searhNote(newText)
+                }else{
+                    noteAdapter.updateNotes(allNoteList)
+                }
+                return true
+            }
+
+
+        })
 
     }
 

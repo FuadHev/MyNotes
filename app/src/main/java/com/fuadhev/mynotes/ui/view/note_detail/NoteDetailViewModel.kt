@@ -3,6 +3,7 @@ package com.fuadhev.mynotes.ui.view.note_detail
 import android.provider.ContactsContract.CommonDataKinds.Note
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.Delete
 import com.fuadhev.mynotes.repo.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers.IO
@@ -17,5 +18,11 @@ class NoteDetailViewModel @Inject constructor(private val repo:Repository) :View
             repo.insertNote(note)
         }
     }
+    fun deleteNote(note:com.fuadhev.mynotes.entity.Note){
+        viewModelScope.launch(IO) {
+            repo.deleteNote(note)
+        }
+    }
+
 
 }
