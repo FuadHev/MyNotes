@@ -26,5 +26,14 @@ class NoteListViewModel @Inject constructor(private val repo:Repository):ViewMod
         }
 
     }
-
+    fun updateNote(note:com.fuadhev.mynotes.entity.Note){
+        viewModelScope.launch(IO) {
+            repo.insertNote(note)
+        }
+    }
+    fun deleteNote(note:com.fuadhev.mynotes.entity.Note){
+        viewModelScope.launch(IO) {
+            repo.deleteNote(note)
+        }
+    }
 }

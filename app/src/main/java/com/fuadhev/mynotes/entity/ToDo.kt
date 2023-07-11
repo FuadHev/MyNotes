@@ -12,5 +12,5 @@ data class ToDo(
 //    @ColumnInfo(name = "day") val day: Int,
 //    @ColumnInfo(name = "month") val month: Int,
 //    @ColumnInfo(name = "clock") val clock: String,
-    @ColumnInfo(name = "isComplete") val isComplete:Boolean) {
+    @ColumnInfo(name = "isComplete") var isComplete:Boolean) {
 }

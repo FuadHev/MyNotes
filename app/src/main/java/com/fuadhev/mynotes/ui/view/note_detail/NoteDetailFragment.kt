@@ -58,7 +58,7 @@ class NoteDetailFragment : Fragment() {
         }
         // Geri tuşu olayını etkinleştirin
         activity.onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
-        binding.save.visibility = INVISIBLE
+        binding.save.visibility = GONE
 
         binding.save.setOnClickListener {
             if (!noteTxtisChange || !noteTitleisChange) {
@@ -133,6 +133,7 @@ class NoteDetailFragment : Fragment() {
     }
 
     private fun showDeleteDialog() {
+
         val dialogBinding = SaveChangesDialogBinding.inflate(layoutInflater)
         val mDialog = Dialog(requireContext())
         mDialog.setContentView(dialogBinding.root)

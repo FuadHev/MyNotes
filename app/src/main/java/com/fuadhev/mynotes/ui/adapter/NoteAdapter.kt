@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.fuadhev.mynotes.databinding.NoteItemBinding
 import com.fuadhev.mynotes.entity.Note
+import com.fuadhev.mynotes.entity.ToDo
 
 class NoteAdapter(private val postClickListener: PostClickListener,private var notesList: List<Note>) :
     RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
@@ -23,7 +24,9 @@ class NoteAdapter(private val postClickListener: PostClickListener,private var n
     override fun getItemCount(): Int {
         return notesList.size
     }
-
+    fun getNoteByPosition(position: Int): Note {
+        return notesList[position]
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateNotes(notesList: List<Note>){
