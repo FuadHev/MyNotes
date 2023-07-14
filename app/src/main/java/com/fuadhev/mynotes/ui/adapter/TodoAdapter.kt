@@ -4,6 +4,8 @@ import android.animation.Animator
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -45,6 +47,18 @@ class TodoAdapter(private val toDoClickListener: ToDoClickListener,private var t
         }
         b.textView2.text=toDo.todo_txt
         b.lottieAnim.repeatCount = 0
+
+        if (toDo.time!=""){
+            b.time.text=toDo.time
+        }else{
+            b.time.visibility=GONE
+        }
+
+        if(toDo.isAlarm){
+            b.alarm.visibility=VISIBLE
+        }else{
+            b.alarm.visibility= GONE
+        }
 
         b.todoCard.setOnClickListener {
             toDoClickListener.todoClickListener(toDo)

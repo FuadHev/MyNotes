@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId "com.fuadhev.mynotes"
-        minSdk 23
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -68,5 +68,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation "com.airbnb.android:lottie:3.4.0"
+    // For developers using AndroidX in their applications
+    implementation 'pub.devrel:easypermissions:3.0.0'
 
+    // For developers using the Android Support Library
+    implementation 'pub.devrel:easypermissions:2.0.1'
 }

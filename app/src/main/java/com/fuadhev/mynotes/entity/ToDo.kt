@@ -11,6 +11,8 @@ data class ToDo(
     @ColumnInfo(name = "todo_txt") val todo_txt:String,
 //    @ColumnInfo(name = "day") val day: Int,
 //    @ColumnInfo(name = "month") val month: Int,
-//    @ColumnInfo(name = "clock") val clock: String,
+    @ColumnInfo(name = "alarm") var isAlarm: Boolean,
+    @ColumnInfo(name = "time") val time: String,
+    @ColumnInfo(name = "requestCode") val requestCode: Int,
     @ColumnInfo(name = "isComplete") var isComplete:Boolean) {
 }

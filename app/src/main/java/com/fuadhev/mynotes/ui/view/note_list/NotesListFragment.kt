@@ -10,6 +10,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.EditText
 import android.widget.SearchView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -59,6 +60,7 @@ class NotesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        onBackPressed()
         setRecyclerView()
         setItemTouchListener()
         allNoteList=ArrayList()
@@ -205,6 +207,20 @@ class NotesListFragment : Fragment() {
 
         ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.rv)
     }
+
+    private fun onBackPressed(){
+        val activity = requireActivity()
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+
+                if (findNavController().currentDestination?.id == R.id.notesListFragment) {
+                    requireActivity().finish()
+                }
+            }
+        }
+        // Geri tuşu olayını etkinleştirin
+        activity.onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+    }
     private fun showDeleteSnackBar(note: Note) {
         Snackbar.make(requireView(), "Meal Deleted", Snackbar.LENGTH_LONG).apply {
             setAction(
@@ -215,6 +231,7 @@ class NotesListFragment : Fragment() {
             }.show()
         }
     }
+
 
     private fun setRecyclerView() {
         binding.rv.layoutManager = LinearLayoutManager(requireActivity())

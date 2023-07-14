@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -39,27 +40,33 @@ class AddNoteFragment : Fragment() {
 
         binding.save.setOnClickListener {
 
-            val hour = now.get(Calendar.HOUR_OF_DAY)
-            val minute = now.get(Calendar.MINUTE)
-            Log.e("time", "$hour $minute")
-
             val noteTitle = binding.noteTitle.text.toString()
             val noteTxt = binding.noteTxt.text.toString()
-            val day = now.get(Calendar.DAY_OF_MONTH)
-            val month = now.get(Calendar.MONTH) + 1
+            if(noteTitle.trim()!=""&& noteTxt.trim()!=""){
+                val hour = now.get(Calendar.HOUR_OF_DAY)
+                val minute = now.get(Calendar.MINUTE)
 
-            val clock = if (minute < 10) {
-                Log.e("time", "$hour 0$minute")
-                "$hour:0$minute"
-            } else {
-                "$hour:$minute"
 
+                val day = now.get(Calendar.DAY_OF_MONTH)
+                val month = now.get(Calendar.MONTH) + 1
+
+                val clock = if (minute < 10) {
+                    Log.e("time", "$hour 0$minute")
+                    "$hour:0$minute"
+                } else {
+                    "$hour:$minute"
+
+                }
+
+                val year = now.get(Calendar.YEAR)
+                val note = Note(0, noteTitle, noteTxt, day, month, clock, year)
+                viewModel.insertNote(note)
+                findNavController().navigate(AddNoteFragmentDirections.actionAddNoteFragmentToNotesListFragment())
+            }else{
+                Toast.makeText(requireContext(), "title or note cannot be left blank", Toast.LENGTH_SHORT).show()
             }
 
-            val year = now.get(Calendar.YEAR)
-            val note = Note(0, noteTitle, noteTxt, day, month, clock, year)
-            viewModel.insertNote(note)
-            findNavController().navigate(AddNoteFragmentDirections.actionAddNoteFragmentToNotesListFragment())
+
 
 
         }
