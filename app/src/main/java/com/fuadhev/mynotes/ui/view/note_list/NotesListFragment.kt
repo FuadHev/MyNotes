@@ -202,9 +202,6 @@ class NotesListFragment : Fragment() {
         }
 
 
-
-
-
         ItemTouchHelper(itemTouchHelper).attachToRecyclerView(binding.rv)
     }
 
